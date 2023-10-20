@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Список користувачів</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Ім'я користувача</th>
+                <th>Створено</th>
+                <th>Група</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.created }}</td>
+                    <td>{{ user.group.name }}</td>
+                    <td>
+                        <a href="{% url 'edit_user' user.id %}" class="btn btn-primary">Редагувати</a>
+                        <a href="{% url 'delete_user' user.id %}" class="btn btn-danger">Видалити</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'add_user' %}" class="btn btn-success">Додати користувача</a>
+{% endblock %}
+
